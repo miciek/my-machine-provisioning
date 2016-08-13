@@ -1,7 +1,5 @@
 {
   "machine_user": "miciek",
-  "npm": {
-    "version": "6.3.1",
-    "node_version": "0.31.4"
-  }
+  "nodejs_debian_repo_version": "6.x",
+  "nodejs_version": "6.3.1"
 }

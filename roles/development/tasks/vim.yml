@@ -4,7 +4,7 @@
     name: vim
     update_cache: yes
   register: installation
-  become: true
+  become: yes
 
 - name: using my .vimrc
   file:
