@@ -6,21 +6,22 @@
     - curl
     - build-essential
     - libssl-dev
+  become: yes
   tags: nvm
 
 - name: Install nvm
-  become: true
   become_user: "{{ machine_user }}"
   git: repo=https://github.com/creationix/nvm.git dest=~/.nvm version={{ nvm.version }}
+  become: yes
   tags: nvm
 
 - name: Source nvm in ~/.profile
-  become: true
   become_user: "{{ machine_user }}"
   lineinfile: >
     dest=~/.profile
     line="source ~/.nvm/nvm.sh"
     create=yes
+  become: yes
   tags: nvm
 
 - name: Install {{ nvm.node_version }}
