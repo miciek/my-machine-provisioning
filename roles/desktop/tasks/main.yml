@@ -3,3 +3,4 @@
   - include: font.yml
   - include: chrome.yml
   - include: ohmyzsh.yml
+  - include: tools.yml

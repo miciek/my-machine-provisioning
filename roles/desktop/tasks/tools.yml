@@ -1,0 +1,8 @@
+---
+- name: Make sure useful tools are installed
+  apt:
+    pkg:
+      - mc
+    state: installed
+    update_cache: yes
+  become: yes
