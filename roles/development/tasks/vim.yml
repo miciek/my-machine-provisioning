@@ -1,0 +1,16 @@
+---
+- name: download vim
+  apt:
+    name: vim
+    update_cache: yes
+  register: installation
+  become: true
+
+- name: using my .vimrc
+  file:
+    src: ~/.dotfiles/{{ item.src }}
+    dest: ~/{{ item.dest }}
+    state: link
+  with_items:
+    - { src: '.vimrc', dest: '.vimrc' }
+  when: installation|success

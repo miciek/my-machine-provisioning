@@ -1,0 +1,41 @@
+---
+- name: download nvm source
+  git:
+    repo: "https://github.com/creationix/nvm.git"
+    dest: "{{ ansible_env.HOME }}/setup/.nvm"
+    version: v0.31.4
+  tags: nodejs
+
+- name: install node with nvm
+  shell: "source {{ ansible_env.HOME }}/setup/.nvm/nvm.sh && nvm install 6.3.1 && nvm alias default v6.3.1"
+  args:
+    chdir: "{{ ansible_env.HOME }}/setup/.nvm"
+    executable: /bin/bash
+  tags: nodejs
+
+- name: download npm installer
+  get_url:
+    url: https://www.npmjs.com/install.sh
+    dest: /tmp/npm-install.sh
+    validate_certs: false
+  tags: nodejs
+
+- name: install npm
+  shell: "source {{ ansible_env.HOME }}/setup/.nvm/nvm.sh && source /tmp/npm-install.sh"
+  args:
+    chdir: "{{ ansible_env.HOME }}/setup/.nvm"
+    executable: /bin/bash
+  tags: nodejs
+
+- name: install global nodejs packages
+  npm:
+    name: "{{ item.name }}"
+    version: "{{ item.version|default('') }}"
+    state: present
+    global: yes
+  tags: nodejs
+  with_items:
+    - {name: 'bower'}
+    - {name: 'grunt-cli'}
+    - {name: 'jshint'}
+    - {name: 'coffee-jshint'}

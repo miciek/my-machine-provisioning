@@ -1,0 +1,17 @@
+---
+- name: Make sure that the setup directory exsists
+  file:
+    path: "{{ ansible_env.HOME }}/setup"
+    state: directory
+    mode: 0755
+
+- name: Make sure git is installed
+  apt:
+    name: git
+    update_cache: yes
+  become: true
+
+- name: Clone dotfiles repo
+  git:
+    repo: https://github.com/miciek/dotfiles.git
+    dest: ~/.dotfiles

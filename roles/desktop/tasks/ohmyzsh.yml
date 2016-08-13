@@ -1,0 +1,21 @@
+---
+- name: installing zsh
+  apt: pkg=zsh state=latest
+  register: installation
+
+- name: cloning  oh-my-zsh
+  git:
+    repo=https://github.com/robbyrussell/oh-my-zsh
+    dest=~/.oh-my-zsh
+  when: installation|success
+  register: cloning
+
+- name: using my .zshrc and .zshenv
+  file:
+    src: ~/.dotfiles/{{ item.src }}
+    dest: ~/{{ item.dest }}
+    state: link
+  with_items:
+    - { src: '.zshrc', dest: '.zshrc' }
+    - { src: '.zshenv', dest: '.zshenv' }
+  when: cloning|success
