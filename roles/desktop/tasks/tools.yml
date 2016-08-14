@@ -3,6 +3,7 @@
   apt:
     pkg:
       - mc
+      - arandr
     state: installed
     update_cache: yes
   become: yes
