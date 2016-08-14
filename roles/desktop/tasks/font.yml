@@ -2,7 +2,7 @@
 ---
 - name: Install source-code-pro - make temp dir
   file:
-    path: "{{ ansible_env.HOME }}/setup/adobe_font"
+    path: "{{ ansible_cache_dir }}/adobe_font"
     state: directory
   become: yes
   become_user: "{{ machine_user }}"
@@ -10,15 +10,15 @@
 - name: Install source-code-pro - download font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
-    dest: "{{ ansible_env.HOME }}/setup/adobe_font/source_code_pro.zip"
+    dest: "{{ ansible_cache_dir }}/adobe_font/source_code_pro.zip"
     mode: 0755
   become: yes
   become_user: "{{ machine_user }}"
 
 - name: Install source-code-pro - unzip downloaded font
   unarchive:
-    src: "{{ ansible_env.HOME }}/setup/adobe_font/source_code_pro.zip"
-    dest: "{{ ansible_env.HOME }}/setup/adobe_font"
+    src: "{{ ansible_cache_dir }}/adobe_font/source_code_pro.zip"
+    dest: "{{ ansible_env.HOME }}/adobe_font"
   become: yes
   become_user: "{{ machine_user }}"
 
@@ -31,7 +31,7 @@
 
 - name: Install source-code-pro - copy fonts
   copy:
-    src: "{{ ansible_env.HOME }}/setup/adobe_font/source-code-pro-1.017R/OTF/{{ item }}"
+    src: "{{ ansible_cache_dir }}/adobe_font/source-code-pro-1.017R/OTF/{{ item }}"
     dest: "{{ ansible_env.HOME }}/.fonts"
     remote_src: true
     mode: 0755
