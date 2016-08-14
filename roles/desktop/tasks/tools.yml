@@ -10,3 +10,6 @@
     state: installed
     update_cache: yes
   become: yes
+
+- name: Update and cleanup apt
+  apt: update_cache=yes autoremove=yes
