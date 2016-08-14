@@ -1,0 +1,5 @@
+---
+- name: Install Atom {{ atom_version }}
+  apt:
+    deb: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom-amd64.deb"
+  become: yes

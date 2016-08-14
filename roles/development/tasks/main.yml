@@ -1,8 +1,10 @@
 ---
   - include: pre.yml
   - include: vim.yml
+  - include: atom.yml
   - include: docker.yml
   - include: nodejs.yml
+  - include: ruby.yml
   - include: java.yml
   - include: scala.yml
   - include: intellij.yml

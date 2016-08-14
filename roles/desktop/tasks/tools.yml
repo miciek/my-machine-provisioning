@@ -4,6 +4,7 @@
     pkg:
       - mc
       - arandr
+      - shotwell
     state: installed
     update_cache: yes
   become: yes

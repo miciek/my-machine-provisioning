@@ -9,6 +9,6 @@
   git:
     repo: https://github.com/miciek/dotfiles.git
     dest: "{{ ansible_env.HOME }}/.dotfiles"
-  register: dotfiles
+    force: true
   become: yes
   become_user: "{{ machine_user }}"
