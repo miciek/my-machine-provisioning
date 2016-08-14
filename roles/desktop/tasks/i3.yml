@@ -8,32 +8,37 @@
     update_cache: yes
   become: yes
 
-- name: install i3 - add apt repo
+- name: Install i3 - add apt repo
   apt_repository: repo='deb http://debian.sur5r.net/i3/ {{ ansible_distribution_release }} universe' state=present
-  become: true
+  become: yes
 
-- name: install i3
+- name: Install i3
   apt:
     name: i3
     update_cache: yes
     force: yes
-  become: true
+  become: yes
 
-- name: setup lightdm
+- name: Setup lightdm
   copy:
     src: "{{ ansible_env.HOME }}/.dotfiles/lightdm/"
     dest: "/etc/lightdm/lightdm.conf.d/"
     mode: 0755
-  become: true
+  become: yes
+  become_user: {{ machine_user }}
 
 - name: Link .i3 dir from the dotfiles repo
   file:
-    src: ~/.dotfiles/.i3
-    dest: ~/.i3
+    src: "{{ ansible_env.HOME }}/.dotfiles/.i3"
+    dest: "{{ ansible_env.HOME }}/.i3"
     state: link
+  become: yes
+  become_user: {{ machine_user }}
 
 - name: Link .i3status.conf from the dotfiles repo
   file:
-    src: ~/.dotfiles/.i3status.conf
-    dest: ~/.i3status.conf
+    src: "{{ ansible_env.HOME }}/.dotfiles/.i3status.conf"
+    dest: "{{ ansible_env.HOME }}/.i3status.conf"
     state: link
+  become: yes
+  become_user: {{ machine_user }}

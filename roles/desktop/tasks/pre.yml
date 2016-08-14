@@ -11,27 +11,33 @@
     update_cache: yes
   become: true
 
-- name: make {{ machine_user }} a sudoer
+- name: Make {{ machine_user }} a sudoer
   user: name={{ machine_user }} groups=sudo append=yes
   become: yes
 
 - name: Clone dotfiles repo
   git:
     repo: https://github.com/miciek/dotfiles.git
-    dest: ~/.dotfiles
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
   register: dotfiles
+  become: yes
+  become_user: {{ machine_user }}
 
 - name: Link .gitconfig from the dotfiles repo
   file:
-    src: ~/.dotfiles/.gitconfig
-    dest: ~/.gitconfig
+    src: "{{ ansible_env.HOME }}/.dotfiles/.gitconfig"
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
     state: link
   when: dotfiles|success
+  become: yes
+  become_user: {{ machine_user }}
 
 
 - name: Link Apps dir from the dotfiles repo
   file:
-    src: ~/.dotfiles/Apps
-    dest: ~/Apps
+    src: "{{ ansible_env.HOME }}/.dotfiles/Apps"
+    dest: "{{ ansible_env.HOME }}/Apps"
     state: link
   when: dotfiles|success
+  become: yes
+  become_user: {{ machine_user }}

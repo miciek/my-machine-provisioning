@@ -1,26 +1,30 @@
 ---
-- name: Installing zsh
+- name: Install zsh
   apt: pkg=zsh state=latest
   register: installation
   become: yes
 
-- name: Cloning  oh-my-zsh
+- name: Clone  oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
-    dest: ~/.oh-my-zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
     force: true
   when: installation|success
   register: cloning
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: Using my .zshrc and .zshenv
+- name: Use my .zshrc and .zshenv
   file:
-    src: ~/.dotfiles/{{ item.src }}
-    dest: ~/{{ item.dest }}
+    src: "{{ ansible_env.HOME }}/.dotfiles/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
     state: link
   with_items:
     - { src: '.zshrc', dest: '.zshrc' }
     - { src: '.zshenv', dest: '.zshenv' }
   when: cloning|success
+  become: yes
+  become_user: {{ machine_user }}
 
 - name: Use my custom oh-my-zsh stuff
   copy:
@@ -28,8 +32,10 @@
     dest: "{{ ansible_env.HOME }}/"
     mode: 0755
   when: cloning|success
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: change default shell to zsh
+- name: Change default shell to zsh
   user: name={{ machine_user }} shell=/bin/zsh
   when: cloning|success
   become: yes

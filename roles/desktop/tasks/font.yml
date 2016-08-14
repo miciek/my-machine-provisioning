@@ -1,33 +1,44 @@
+# Original author: JBKahn, see: https://github.com/JBKahn/provisioning-local/blob/master/roles/common/tasks/font.yml
 ---
-- name: install source-code-pro - make temp dir
+- name: Install source-code-pro - make temp dir
   file:
     path: "{{ ansible_env.HOME }}/setup/adobe_font"
     state: directory
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: install source-code-pro - download font
+- name: Install source-code-pro - download font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
     dest: "{{ ansible_env.HOME }}/setup/adobe_font/source_code_pro.zip"
     mode: 0755
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: install source-code-pro - unzip downloaded font
+- name: Install source-code-pro - unzip downloaded font
   unarchive:
     src: "{{ ansible_env.HOME }}/setup/adobe_font/source_code_pro.zip"
     dest: "{{ ansible_env.HOME }}/setup/adobe_font"
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: install source-code-pro - make fonts directory
+- name: Install source-code-pro - make fonts directory
   file:
     path: "{{ ansible_env.HOME }}/.fonts"
     state: directory
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: install source-code-pro - copy fonts
+- name: Install source-code-pro - copy fonts
   copy:
     src: "{{ ansible_env.HOME }}/setup/adobe_font/source-code-pro-1.017R/OTF/"
     dest: "{{ ansible_env.HOME }}/.fonts"
     mode: 0755
   register: fonts_copied
+  become: yes
+  become_user: {{ machine_user }}
 
-- name: install source-code-pro - font cache
+- name: Install source-code-pro - font cache
   command: fc-cache -f -v
   become: yes
   when: fonts_copied|changed

@@ -1,20 +1,22 @@
 ---
-- name: download vim
+- name: Download vim
   apt:
     name: vim
     update_cache: yes
   register: installation
   become: yes
 
-- name: using my .vimrc
+- name: Use my .vimrc
   file:
-    src: ~/.dotfiles/{{ item.src }}
-    dest: ~/{{ item.dest }}
+    src: "{{ ansible_env.HOME }}/.dotfiles/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}~/{{ item.dest }}"
     state: link
   with_items:
     - { src: '.vimrc', dest: '.vimrc' }
     - { src: '.selected_editor', dest: '.selected_editor' }
   when: installation|success
+  become: yes
+  become_user: {{ machine_user }}
 
 - name: Use my custom .vim stuff
   copy:
@@ -22,3 +24,5 @@
     dest: "{{ ansible_env.HOME }}/"
     mode: 0755
   when: installation|success
+  become: yes
+  become_user: {{ machine_user }}

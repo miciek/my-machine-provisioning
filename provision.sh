@@ -11,4 +11,4 @@ cd my-machine-provisioning
 
 sudo pip install -r requirements.txt
 
-ansible-playbook setup.yml -i HOSTS --ask-sudo-pass --extra-vars "@config.json"
+ansible-playbook setup.yml -i hosts --ask-sudo-pass --extra-vars "@config.json"
