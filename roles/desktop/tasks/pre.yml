@@ -11,13 +11,27 @@
     update_cache: yes
   become: true
 
+- name: make {{ machine_user }} a sudoer
+  user: name={{ machine_user }} groups=sudo append=yes
+  become: yes
+
 - name: Clone dotfiles repo
   git:
     repo: https://github.com/miciek/dotfiles.git
     dest: ~/.dotfiles
+  register: dotfiles
+
+- name: Link .gitconfig from the dotfiles repo
+  file:
+    src: ~/.dotfiles/.gitconfig
+    dest: ~/.gitconfig
+    state: link
+  when: dotfiles|success
+
 
 - name: Link Apps dir from the dotfiles repo
   file:
     src: ~/.dotfiles/Apps
     dest: ~/Apps
     state: link
+  when: dotfiles|success

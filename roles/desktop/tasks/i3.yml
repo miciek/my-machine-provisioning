@@ -1,4 +1,13 @@
 ---
+- name: Make sure all packages used by .i3config are installed
+  apt:
+    pkg:
+      - xautolock
+      - gnome-screensaver
+    state: installed
+    update_cache: yes
+  become: yes
+
 - name: install i3 - add apt repo
   apt_repository: repo='deb http://debian.sur5r.net/i3/ {{ ansible_distribution_release }} universe' state=present
   become: true
@@ -21,4 +30,10 @@
   file:
     src: ~/.dotfiles/.i3
     dest: ~/.i3
+    state: link
+
+- name: Link .i3status.conf from the dotfiles repo
+  file:
+    src: ~/.dotfiles/.i3status.conf
+    dest: ~/.i3status.conf
     state: link
