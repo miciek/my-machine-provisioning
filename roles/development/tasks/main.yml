@@ -3,3 +3,4 @@
   - include: vim.yml
   - include: docker.yml
   - include: nodejs.yml
+  - include: java.yml
