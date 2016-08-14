@@ -1,5 +1,6 @@
 ---
-  - include: pre.yml
+  - include: user.yml
+  - include: dotfiles.yml
   - include: font.yml
   - include: i3.yml
   - include: chrome.yml

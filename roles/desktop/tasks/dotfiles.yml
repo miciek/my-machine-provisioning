@@ -5,10 +5,6 @@
     update_cache: yes
   become: yes
 
-- name: Make {{ machine_user }} a sudoer
-  user: name={{ machine_user }} groups=sudo append=yes
-  become: yes
-
 - name: Clone dotfiles repo
   git:
     repo: https://github.com/miciek/dotfiles.git

@@ -1,0 +1,8 @@
+---
+- name: Generate ssh keys for {{ machine_user }}
+  user: name={{ machine_user }} generate_ssh_key=true
+  become: yes
+
+- name: Make {{ machine_user }} a sudoer
+  user: name={{ machine_user }} groups=sudo append=yes
+  become: yes

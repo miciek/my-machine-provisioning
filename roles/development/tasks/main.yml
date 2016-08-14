@@ -4,4 +4,5 @@
   - include: docker.yml
   - include: nodejs.yml
   - include: java.yml
+  - include: scala.yml
   - include: intellij.yml

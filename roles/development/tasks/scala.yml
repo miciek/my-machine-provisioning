@@ -1,0 +1,30 @@
+---
+- name: Install Scala {{ scala_version }}
+  apt:
+    deb: "http://www.scala-lang.org/files/archive/scala-{{ scala_version }}.deb"
+  become: yes
+
+- name: Add sbt repo key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 642AC823
+    state: present
+  become: yes
+  register: repo_key_added
+
+- name: Add sources to sbt.list
+  lineinfile:
+    dest: /etc/apt/sources.list.d/sbt.list
+    line: "deb https://dl.bintray.com/sbt/debian /"
+    create: yes
+  become: yes
+  register: sources_added
+  when: repo_key_added|succeeded and ansible_distribution == 'Ubuntu'
+
+- name: Install sbt
+  apt:
+    name: sbt
+    update_cache: yes
+    force: yes
+  become: yes
+  when: sources_added|succeeded
