@@ -1,5 +1,8 @@
 {
   "machine_user": "miciek",
   "nodejs_debian_repo_version": "6.x",
-  "nodejs_version": "6.3.1"
+  "nodejs_version": "6.3.1",
+  "intellij_tmp": "",
+  "intellij_install_dir": "/opt/intellij",
+  "intellij_version": "2016.2.1"
 }
