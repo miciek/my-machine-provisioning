@@ -28,10 +28,7 @@
     mode: 0755
   when: cloning|success
 
-- name: Download z-jump plugin
-  get_url:
-    url: https://raw.githubusercontent.com/rupa/z/master/z.sh
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/z.sh"
-    mode: 0755
-  register: z_installed
+- name: change default shell to zsh
+  user: name={{ machine_user }} shell=/bin/zsh
   when: cloning|success
+  become: yes

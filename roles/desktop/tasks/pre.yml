@@ -15,3 +15,9 @@
   git:
     repo: https://github.com/miciek/dotfiles.git
     dest: ~/.dotfiles
+
+- name: Link Apps dir from the dotfiles repo
+  file:
+    src: ~/.dotfiles/Apps
+    dest: ~/Apps
+    state: link
