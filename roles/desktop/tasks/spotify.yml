@@ -1,0 +1,26 @@
+# Based on: https://www.spotify.com/pl/download/linux/
+---
+- name: Add Spotify repo key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: BBEBDCB318AD50EC6865090613B00F1FD2C19886
+    state: present
+  become: yes
+  register: repo_key_added
+
+- name: Add sources to docker.list
+  lineinfile:
+    dest: /etc/apt/sources.list.d/spotify.list
+    line: "deb http://repository.spotify.com stable non-free"
+    create: yes
+  become: yes
+  register: sources_added
+  when: repo_key_added|succeeded and ansible_distribution == 'Ubuntu'
+
+- name: Install spotify-client
+  apt:
+    name: spotify-client
+    update_cache: yes
+    force: yes
+  become: yes
+  when: sources_added|succeeded
