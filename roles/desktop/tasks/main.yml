@@ -1,6 +1,7 @@
 ---
   - include: pre.yml
   - include: font.yml
+  - include: i3.yml
   - include: chrome.yml
   - include: ohmyzsh.yml
   - include: tools.yml
