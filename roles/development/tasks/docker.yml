@@ -30,5 +30,5 @@
     name: docker-compose
     update_cache: yes
     force: yes
-  become: tyes
+  become: yes
   when: sources_added|succeeded

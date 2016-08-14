@@ -31,10 +31,18 @@
 
 - name: Install source-code-pro - copy fonts
   copy:
-    src: "{{ ansible_env.HOME }}/setup/adobe_font/source-code-pro-1.017R/OTF/"
+    src: "{{ ansible_env.HOME }}/setup/adobe_font/source-code-pro-1.017R/OTF/{{ item }}"
     dest: "{{ ansible_env.HOME }}/.fonts"
     remote_src: true
     mode: 0755
+  with_items:
+    - "SourceCodePro-Black.otf"
+    - "SourceCodePro-Bold.otf"
+    - "SourceCodePro-ExtraLight.otf"
+    - "SourceCodePro-Light.otf"
+    - "SourceCodePro-Medium.otf"
+    - "SourceCodePro-Regular.otf"
+    - "SourceCodePro-Semibold.otf"
   register: fonts_copied
   become: yes
   become_user: "{{ machine_user }}"

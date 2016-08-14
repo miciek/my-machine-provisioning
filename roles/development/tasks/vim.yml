@@ -9,7 +9,7 @@
 - name: Use my .vimrc
   file:
     src: "{{ ansible_env.HOME }}/.dotfiles/{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}~/{{ item.dest }}"
+    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
     state: link
   with_items:
     - { src: '.vimrc', dest: '.vimrc' }
@@ -19,11 +19,10 @@
   become_user: "{{ machine_user }}"
 
 - name: Use my custom .vim stuff
-  copy:
+  file:
     src: "{{ ansible_env.HOME }}/.dotfiles/.vim"
-    dest: "{{ ansible_env.HOME }}/"
-    remote_src: true
-    mode: 0755
+    dest: "{{ ansible_env.HOME }}/.vim"
+    state: link
   when: installation|succeeded
   become: yes
   become_user: "{{ machine_user }}"
