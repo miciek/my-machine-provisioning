@@ -5,6 +5,8 @@
       - mc
       - arandr
       - shotwell
+      - duplicity
+      - httpie
     state: installed
     update_cache: yes
   become: yes
