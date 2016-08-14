@@ -9,7 +9,7 @@
 
 - name: Download intellij
   get_url:
-    url: "http://download.jetbrains.com/idea/ideaIC-{{intellij_version}}.tar.gz"
+    url: "https://download.jetbrains.com/idea/ideaIC-{{intellij_version}}.tar.gz"
     dest: "{{ intellij_tmp }}"
   become: yes
 
@@ -38,8 +38,4 @@
 
 - name: Ensure intellij bin exist
   template: src=intellij.j2 dest=/usr/bin/intellij mode=755
-  become: yes
-
-- name: Ensure intellij shortcut is present
-  template: src=intellij.desktop.j2 dest=/usr/share/applications/intellij.desktop
   become: yes
