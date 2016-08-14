@@ -14,15 +14,16 @@
   with_items:
     - { src: '.vimrc', dest: '.vimrc' }
     - { src: '.selected_editor', dest: '.selected_editor' }
-  when: installation|success
+  when: installation|succeeded
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"
 
 - name: Use my custom .vim stuff
   copy:
     src: "{{ ansible_env.HOME }}/.dotfiles/.vim"
     dest: "{{ ansible_env.HOME }}/"
+    remote_src: true
     mode: 0755
-  when: installation|success
+  when: installation|succeeded
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"

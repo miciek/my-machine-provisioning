@@ -15,7 +15,7 @@
     create: yes
   become: yes
   register: sources_added
-  when: repo_key_added|success and ansible_distribution == 'Ubuntu'
+  when: repo_key_added|succeeded and ansible_distribution == 'Ubuntu'
 
 - name: Install docker-engine
   apt:
@@ -23,7 +23,7 @@
     update_cache: yes
     force: yes
   become: yes
-  when: sources_added|success
+  when: sources_added|succeeded
 
 - name: Install docker-compose
   apt:
@@ -31,4 +31,4 @@
     update_cache: yes
     force: yes
   become: tyes
-  when: sources_added|success
+  when: sources_added|succeeded

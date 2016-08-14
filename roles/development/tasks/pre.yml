@@ -17,4 +17,4 @@
     dest: "{{ ansible_env.HOME }}/.dotfiles"
   register: dotfiles
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"

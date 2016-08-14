@@ -21,11 +21,10 @@
 
 - name: Setup lightdm
   copy:
-    src: "{{ ansible_env.HOME }}/.dotfiles/lightdm/"
+    src: "lightdm/"
     dest: "/etc/lightdm/lightdm.conf.d/"
     mode: 0755
   become: yes
-  become_user: {{ machine_user }}
 
 - name: Link .i3 dir from the dotfiles repo
   file:
@@ -33,7 +32,7 @@
     dest: "{{ ansible_env.HOME }}/.i3"
     state: link
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"
 
 - name: Link .i3status.conf from the dotfiles repo
   file:
@@ -41,4 +40,4 @@
     dest: "{{ ansible_env.HOME }}/.i3status.conf"
     state: link
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"

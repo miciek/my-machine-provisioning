@@ -9,7 +9,7 @@
   apt:
     name: git
     update_cache: yes
-  become: true
+  become: yes
 
 - name: Make {{ machine_user }} a sudoer
   user: name={{ machine_user }} groups=sudo append=yes
@@ -21,16 +21,16 @@
     dest: "{{ ansible_env.HOME }}/.dotfiles"
   register: dotfiles
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"
 
 - name: Link .gitconfig from the dotfiles repo
   file:
     src: "{{ ansible_env.HOME }}/.dotfiles/.gitconfig"
     dest: "{{ ansible_env.HOME }}/.gitconfig"
     state: link
-  when: dotfiles|success
+  when: dotfiles|succeeded
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"
 
 
 - name: Link Apps dir from the dotfiles repo
@@ -38,6 +38,6 @@
     src: "{{ ansible_env.HOME }}/.dotfiles/Apps"
     dest: "{{ ansible_env.HOME }}/Apps"
     state: link
-  when: dotfiles|success
+  when: dotfiles|succeeded
   become: yes
-  become_user: {{ machine_user }}
+  become_user: "{{ machine_user }}"
