@@ -3,3 +3,21 @@
   apt:
     deb: "https://github.com/atom/atom/releases/download/v{{ atom_version }}/atom-amd64.deb"
   become: yes
+
+- name: Make atom backup cron
+  cron: name="atom-backup" minute="0" hour="*" job="{{ ansible_env.HOME }}/.dotfiles/atom/atom-backup.sh > {{ ansible_env.HOME }}/.dotfiles/atom/package-list-backup"
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Install packages from the backup
+  shell: apm install --packages-file {{ ansible_env.HOME }}/.dotfiles/atom/package-list-backup
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Use my custom config.cson file
+  file:
+    src: "{{ ansible_env.HOME }}/.dotfiles/atom/config.cson"
+    dest: "{{ ansible_env.HOME }}/.atom/config.cson"
+    state: link
+  become: yes
+  become_user: "{{ machine_user }}"

@@ -31,6 +31,3 @@
 
 - name: Run sbt -v
   shell: sbt -v
-  register: sbt_output
-
-- debug: var=sbt_output verbosity=2
