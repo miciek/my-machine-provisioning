@@ -13,3 +13,4 @@
 
 - name: Update and cleanup apt
   apt: update_cache=yes autoremove=yes
+  become: yes
