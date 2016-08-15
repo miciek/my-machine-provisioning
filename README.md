@@ -34,16 +34,16 @@ The playbook is divided into 2 roles: `desktop` and `development`.
 
 ... All of them with custom settings, themes and versions!
 
+## How does it work?
+The script uses [Ansible](https://www.ansible.com/) computer configuration and management platform to provision my desktop machine. My Ansible playbook uses configuration files from another repository of mine: [dotfiles](https://github.com/miciek/dotfiles).
+
 ## Why?
-Ansible is used to configure and manage servers and server groups. It's very easy to learn and use. Even though its primarily used in server environments, it proves to be very useful for me as a desktop user. It provides:
+Ansible is used to configure and manage servers and server groups. It's very easy to learn and use. Even though it's primarily used in server environments, it proves to be very useful for me as a desktop user. It provides:
 
 - **documentation**: My whole configuration, including installed software, steps needed to install it and versions are kept in one place.
 - **backup**: I don't have to backup my system anymore, just data from my `home` directory.
 - **instant provisioning**: I can provision my perfectly working environment on *any computer*, I just need to insert Live USB stick and run the command.
 - **learning opportunity**: DevOps and "infrastructure as a code" are the future of software development and Ansible plays a big part in it.
-
-## How does it work?
-The script uses [Ansible](https://www.ansible.com/) computer configuration and management platform to provision my desktop machine. The Ansible playbook uses configuration files from another repository of mine: [dotfiles](https://github.com/miciek/dotfiles).
 
 ## Testing
 I test this playbook using VirtualBox + Lubuntu 16.04 setup.
