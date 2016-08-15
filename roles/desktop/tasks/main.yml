@@ -6,3 +6,4 @@
   - include: chrome.yml
   - include: ohmyzsh.yml
   - include: tools.yml
+  - include: spotify.yml
