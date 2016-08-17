@@ -1,7 +1,6 @@
 {
   "machine_user": "miciek",
   "nodejs_debian_repo_version": "6.x",
-  "nodejs_version": "6.3.1",
   "scala_version": "2.11.8",
   "atom_version": "1.9.8",
   "intellij_tmp": "/tmp/ideaIC.tar.gz",
