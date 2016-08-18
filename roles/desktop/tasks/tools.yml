@@ -8,6 +8,7 @@
       - duplicity
       - httpie
       - filezilla
+      - htop
     state: installed
     update_cache: yes
   become: yes
