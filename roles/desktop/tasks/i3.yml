@@ -4,6 +4,8 @@
     pkg:
       - xautolock
       - gnome-screensaver
+      - rxvt-unicode
+      - feh
     state: installed
     update_cache: yes
   become: yes
@@ -38,6 +40,14 @@
   file:
     src: "{{ ansible_env.HOME }}/.dotfiles/.i3status.conf"
     dest: "{{ ansible_env.HOME }}/.i3status.conf"
+    state: link
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Link .Xdefaults from the dotfiles repo
+  file:
+    src: "{{ ansible_env.HOME }}/.dotfiles/.Xdefaults"
+    dest: "{{ ansible_env.HOME }}/.Xdefaults"
     state: link
   become: yes
   become_user: "{{ machine_user }}"
