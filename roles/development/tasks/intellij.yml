@@ -27,7 +27,7 @@
     dest: "{{ intellij_install_dir }}"
   become: yes
 
-- name: Retreive intellij dir name
+- name: Retrieve intellij dir name
   command: ls -t {{ intellij_install_dir }}
   register: intellij_folder_name
   become: yes
