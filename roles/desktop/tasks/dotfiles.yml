@@ -5,7 +5,7 @@
     update_cache: yes
   become: yes
 
-- name: Clone dotfiles repo
+- name: Clone dotfiles repo to {{ ansible_env.HOME }}
   git:
     repo: https://github.com/miciek/dotfiles.git
     dest: "{{ ansible_env.HOME }}/.dotfiles"

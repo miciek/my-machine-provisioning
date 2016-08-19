@@ -5,5 +5,6 @@
   "atom_version": "1.9.8",
   "intellij_tmp": "/tmp/ideaIC.tar.gz",
   "intellij_install_dir": "/opt/intellij",
-  "intellij_version": "2016.2.1"
+  "intellij_version": "2016.2.2",
+  "virtualbox_version": "5.0"
 }

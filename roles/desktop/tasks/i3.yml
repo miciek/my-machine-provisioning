@@ -6,6 +6,7 @@
       - gnome-screensaver
       - rxvt-unicode
       - feh
+      - i3blocks
     state: installed
     update_cache: yes
   become: yes
@@ -36,10 +37,10 @@
   become: yes
   become_user: "{{ machine_user }}"
 
-- name: Link .i3status.conf from the dotfiles repo
+- name: Link .i3blocks.conf from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.i3status.conf"
-    dest: "{{ ansible_env.HOME }}/.i3status.conf"
+    src: "{{ ansible_env.HOME }}/.dotfiles/.i3blocks.conf"
+    dest: "{{ ansible_env.HOME }}/.i3blocks.conf"
     state: link
   become: yes
   become_user: "{{ machine_user }}"
