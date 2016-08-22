@@ -5,10 +5,10 @@
     update_cache: yes
   become: yes
 
-- name: Clone dotfiles repo to {{ ansible_env.HOME }}
+- name: Clone dotfiles repo to {{ user_home_dir }}
   git:
     repo: https://github.com/miciek/dotfiles.git
-    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    dest: "{{ user_home_dir }}/.dotfiles"
     force: yes
   register: dotfiles
   become: yes
@@ -16,8 +16,8 @@
 
 - name: Link .gitconfig from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.gitconfig"
-    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    src: "{{ user_home_dir }}/.dotfiles/.gitconfig"
+    dest: "{{ user_home_dir }}/.gitconfig"
     state: link
   when: dotfiles|succeeded
   become: yes
@@ -26,8 +26,8 @@
 
 - name: Link Apps dir from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/Apps"
-    dest: "{{ ansible_env.HOME }}/Apps"
+    src: "{{ user_home_dir }}/.dotfiles/Apps"
+    dest: "{{ user_home_dir }}/Apps"
     state: link
   when: dotfiles|succeeded
   become: yes

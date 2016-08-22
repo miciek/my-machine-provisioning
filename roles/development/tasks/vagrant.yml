@@ -6,19 +6,20 @@
   become: yes
 
 - name: Configure the VirtualBox APT repositories
-  apt_repository: 
+  apt_repository:
     repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
     state: present
+  become: yes
 
 - name: Install VirtualBox
   apt:
-    pkg: virtualbox-{{ virtualbox_version }} 
+    pkg: virtualbox-{{ virtualbox_version }}
+    allow_unauthenticated: yes
     update_cache: yes
     state: present
   become: yes
 
-- name: Install Vagrant
+- name: Install Vagrant {{ vagrant_version }}
   apt:
-    name: vagrant
-    update_cache: yes
+    deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_x86_64.deb"
   become: yes

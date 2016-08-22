@@ -1,2 +1,5 @@
 target/
 setup.retry
+*.swp
+.vagrant
+*.log

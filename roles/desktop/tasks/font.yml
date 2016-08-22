@@ -2,38 +2,44 @@
 ---
 - name: Install source-code-pro - make temp dir
   file:
-    path: "{{ ansible_env.HOME }}/adobe_font"
+    path: "{{ user_home_dir }}/adobe_font"
     state: directory
   become: yes
   become_user: "{{ machine_user }}"
 
-- name: Install source-code-pro - download font
+- name: Install source-code-pro - download font to {{ user_home_dir }}/adobe_font/source_code_pro.zip
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip
-    dest: "{{ ansible_env.HOME }}/adobe_font/source_code_pro.zip"
+    dest: "{{ user_home_dir }}/adobe_font/source_code_pro.zip"
     mode: 0755
   become: yes
   become_user: "{{ machine_user }}"
+  register: font_download
 
-- name: Install source-code-pro - unzip downloaded font
+- name: Install source-code-pro - unzip downloaded font to {{ user_home_dir }}/adobe_font/
   unarchive:
-    src: "{{ ansible_env.HOME }}/adobe_font/source_code_pro.zip"
-    dest: "{{ ansible_env.HOME }}/adobe_font"
+    src: "{{ user_home_dir }}/adobe_font/source_code_pro.zip"
+    dest: "{{ user_home_dir }}/adobe_font"
+    remote_src: yes
+    copy: no
   become: yes
   become_user: "{{ machine_user }}"
+  when: font_download|succeeded
+  register: font_unzip
 
 - name: Install source-code-pro - make fonts directory
   file:
-    path: "{{ ansible_env.HOME }}/.fonts"
+    path: "{{ user_home_dir }}/.fonts"
     state: directory
   become: yes
   become_user: "{{ machine_user }}"
+  when: font_unzip|succeeded
 
 - name: Install source-code-pro - copy fonts
   copy:
-    src: "{{ ansible_env.HOME }}/adobe_font/source-code-pro-1.017R/OTF/{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.fonts"
-    remote_src: true
+    src: "{{ user_home_dir }}/adobe_font/source-code-pro-1.017R/OTF/{{ item }}"
+    dest: "{{ user_home_dir }}/.fonts"
+    remote_src: yes
     mode: 0755
   with_items:
     - "SourceCodePro-Black.otf"
@@ -43,18 +49,18 @@
     - "SourceCodePro-Medium.otf"
     - "SourceCodePro-Regular.otf"
     - "SourceCodePro-Semibold.otf"
-  register: fonts_copied
+  register: fonts_copying
   become: yes
   become_user: "{{ machine_user }}"
 
 - name: Install source-code-pro - font cache
   command: fc-cache -f -v
   become: yes
-  when: fonts_copied|changed
+  when: fonts_copying|changed
 
 - name: Install source-code-pro - delete temp directory
   file:
-    path: "{{ ansible_env.HOME }}/adobe_font"
+    path: "{{ user_home_dir }}/adobe_font"
     state: absent
   become: yes
   become_user: "{{ machine_user }}"

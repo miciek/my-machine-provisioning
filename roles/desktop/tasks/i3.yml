@@ -2,11 +2,13 @@
 - name: Make sure all packages used by .i3config are installed
   apt:
     pkg:
-      - xautolock
-      - gnome-screensaver
-      - rxvt-unicode
-      - feh
       - i3blocks
+      - rxvt-unicode
+      - xautolock
+      - feh # wallpaper
+      - gnome-screensaver
+      - udevil # automount
+      - pulseaudio-module-bluetooth # allows sending audio to bluetooth devices
     state: installed
     update_cache: yes
   become: yes
@@ -31,24 +33,31 @@
 
 - name: Link .i3 dir from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.i3"
-    dest: "{{ ansible_env.HOME }}/.i3"
+    src: "{{ user_home_dir }}/.dotfiles/.i3"
+    dest: "{{ user_home_dir }}/.i3"
     state: link
   become: yes
   become_user: "{{ machine_user }}"
 
 - name: Link .i3blocks.conf from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.i3blocks.conf"
-    dest: "{{ ansible_env.HOME }}/.i3blocks.conf"
+    src: "{{ user_home_dir }}/.dotfiles/.i3blocks.conf"
+    dest: "{{ user_home_dir }}/.i3blocks.conf"
     state: link
   become: yes
   become_user: "{{ machine_user }}"
 
 - name: Link .Xdefaults from the dotfiles repo
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.Xdefaults"
-    dest: "{{ ansible_env.HOME }}/.Xdefaults"
+    src: "{{ user_home_dir }}/.dotfiles/.Xdefaults"
+    dest: "{{ user_home_dir }}/.Xdefaults"
     state: link
   become: yes
   become_user: "{{ machine_user }}"
+
+- name: Install font-awesome (displaying nice icons in i3blocks)
+  apt:
+    name: fonts-font-awesome
+    update_cache: yes
+    force: yes
+  become: yes

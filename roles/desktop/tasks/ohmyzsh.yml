@@ -7,7 +7,7 @@
 - name: Clone oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    dest: "{{ user_home_dir }}/.oh-my-zsh"
     force: true
   when: installation|succeeded
   register: cloning
@@ -16,8 +16,8 @@
 
 - name: Use my .zshrc and .zshenv
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    src: "{{ user_home_dir }}/.dotfiles/{{ item.src }}"
+    dest: "{{ user_home_dir }}/{{ item.dest }}"
     state: link
   with_items:
     - { src: '.zshrc', dest: '.zshrc' }
@@ -28,7 +28,7 @@
 
 - name: Remove default custom directory from oh-my-zsh
   file:
-    path: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
+    path: "{{ user_home_dir }}/.oh-my-zsh/custom"
     state: absent
   register: custom_absent
   become: yes
@@ -36,8 +36,8 @@
 
 - name: Use my custom oh-my-zsh stuff
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.oh-my-zsh/custom"
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom"
+    src: "{{ user_home_dir }}/.dotfiles/.oh-my-zsh/custom"
+    dest: "{{ user_home_dir }}/.oh-my-zsh/custom"
     state: link
   when: cloning|succeeded and custom_absent|succeeded
   become: yes

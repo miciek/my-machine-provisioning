@@ -8,8 +8,8 @@
 
 - name: Use my .vimrc
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    src: "{{ user_home_dir }}/.dotfiles/{{ item.src }}"
+    dest: "{{ user_home_dir }}/{{ item.dest }}"
     state: link
   with_items:
     - { src: '.vimrc', dest: '.vimrc' }
@@ -20,8 +20,8 @@
 
 - name: Use my custom .vim stuff
   file:
-    src: "{{ ansible_env.HOME }}/.dotfiles/.vim"
-    dest: "{{ ansible_env.HOME }}/.vim"
+    src: "{{ user_home_dir }}/.dotfiles/.vim"
+    dest: "{{ user_home_dir }}/.vim"
     state: link
   when: installation|succeeded
   become: yes

@@ -8,7 +8,7 @@
 - name: Clone dotfiles repo
   git:
     repo: https://github.com/miciek/dotfiles.git
-    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    dest: "{{ user_home_dir }}/.dotfiles"
     force: true
   become: yes
   become_user: "{{ machine_user }}"

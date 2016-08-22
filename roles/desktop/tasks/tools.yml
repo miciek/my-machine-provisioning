@@ -9,6 +9,8 @@
       - httpie
       - filezilla
       - htop
+      - fdupes
+      - unzip
     state: installed
     update_cache: yes
   become: yes

@@ -12,6 +12,10 @@
     url: "https://download.jetbrains.com/idea/ideaIC-{{intellij_version}}.tar.gz"
     dest: "{{ intellij_tmp }}"
   become: yes
+  register: intellij_download
+  until: intellij_download|succeeded
+  retries: 10
+  delay: 1
 
 - name: Ensure installation directory
   file:
@@ -22,9 +26,10 @@
 
 - name: Unarchive intellij
   unarchive:
-    copy: no
     src: "{{ intellij_tmp }}"
     dest: "{{ intellij_install_dir }}"
+    copy: no
+    remote_src: yes
   become: yes
 
 - name: Retrieve intellij dir name

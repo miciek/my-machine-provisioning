@@ -4,5 +4,5 @@
   become: yes
 
 - name: Make {{ machine_user }} a sudoer
-  user: name={{ machine_user }} groups=sudo append=yes
+  user: name={{ machine_user }} groups=sudo append=yes home={{ user_home_dir }}
   become: yes
