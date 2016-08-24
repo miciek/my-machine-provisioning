@@ -46,7 +46,7 @@ Ansible is used to configure and manage servers and server groups. It's very eas
 - **learning opportunity**: DevOps and "infrastructure as a code" are the future of software development and Ansible plays a big part in it.
 
 ## Testing
-I test this playbook using VirtualBox + Lubuntu 16.04 setup.
+The machine can be easily provisioned from scratch using Vagrant. Just make sure you have Vagrant installed and execute `vagrant up`. Then you can use the fresh system inside VirtualBox.
 
 ## Inspiration and resources
 Majority of tasks and roles in this repository are my own, but the first version was heavily inspired by [Joseph Kahn](https://blog.josephkahn.io)'s blog post: [Ansible or: How I Learned to Stop Wasting Time Setting Up My Computer and Script It](https://blog.josephkahn.io/articles/ansible/).
