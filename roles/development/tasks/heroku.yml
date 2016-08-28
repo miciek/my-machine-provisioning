@@ -1,0 +1,18 @@
+# https://devcenter.heroku.com/articles/heroku-command-line
+---
+- name: Heroku CLI - make sure Ruby is installed
+  apt:
+    pkg: ruby
+    state: installed
+  become: yes
+
+- name: Heroku CLI - download install script
+  get_url:
+    url: https://toolbelt.heroku.com/install-ubuntu.sh
+    dest: "{{ ansible_env.HOME }}/install-ubuntu.sh"
+    mode: 0755
+  become: yes
+
+- name: Heroku CLI - run install script
+  shell: "{{ ansible_env.HOME }}/install-ubuntu.sh"
+  become: yes

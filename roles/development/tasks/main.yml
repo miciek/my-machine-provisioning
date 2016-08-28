@@ -9,3 +9,4 @@
   - include: java.yml
   - include: scala.yml
   - include: intellij.yml
+  - include: heroku.yml
