@@ -12,3 +12,8 @@
     force: true
   become: yes
   become_user: "{{ machine_user }}"
+  register: dotfiles_clone
+  until: dotfiles_clone|succeeded
+  retries: 10
+  delay: 1
+  ignore_errors: yes

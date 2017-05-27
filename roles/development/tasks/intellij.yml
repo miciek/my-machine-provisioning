@@ -16,6 +16,7 @@
   until: intellij_download|succeeded
   retries: 10
   delay: 1
+  ignore_errors: yes
 
 - name: Ensure installation directory
   file:
@@ -28,7 +29,6 @@
   unarchive:
     src: "{{ intellij_tmp }}"
     dest: "{{ intellij_install_dir }}"
-    copy: no
     remote_src: yes
   become: yes
 

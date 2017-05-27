@@ -21,7 +21,6 @@
     src: "{{ user_home_dir }}/adobe_font/source_code_pro.zip"
     dest: "{{ user_home_dir }}/adobe_font"
     remote_src: yes
-    copy: no
   become: yes
   become_user: "{{ machine_user }}"
   when: font_download|succeeded

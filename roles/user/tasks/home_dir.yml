@@ -1,0 +1,4 @@
+---
+- name: Change ownership of {{ user_home_dir }} to {{ machine_user }}
+  file: dest={{ user_home_dir }} owner={{ machine_user }} group={{ machine_user }} recurse=yes
+  become: yes

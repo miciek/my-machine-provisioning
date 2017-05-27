@@ -10,9 +10,13 @@
     repo: https://github.com/miciek/dotfiles.git
     dest: "{{ user_home_dir }}/.dotfiles"
     force: yes
-  register: dotfiles
   become: yes
   become_user: "{{ machine_user }}"
+  register: dotfiles
+  until: dotfiles|succeeded
+  retries: 10
+  delay: 1
+  ignore_errors: yes
 
 - name: Link .gitconfig from the dotfiles repo
   file:
@@ -22,7 +26,6 @@
   when: dotfiles|succeeded
   become: yes
   become_user: "{{ machine_user }}"
-
 
 - name: Link Apps dir from the dotfiles repo
   file:

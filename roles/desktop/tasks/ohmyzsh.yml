@@ -10,9 +10,13 @@
     dest: "{{ user_home_dir }}/.oh-my-zsh"
     force: true
   when: installation|succeeded
-  register: cloning
   become: yes
   become_user: "{{ machine_user }}"
+  register: cloning
+  until: cloning|succeeded
+  retries: 10
+  delay: 1
+  ignore_errors: yes
 
 - name: Use my .zshrc and .zshenv
   file:
