@@ -1,5 +1,6 @@
 {
   "machine_user": "miciek",
+  "machine_name": "local",
   "user_home_dir": "/home/miciek",
   "nodejs_debian_repo_version": "6.x",
   "scala_version": "2.12.2",

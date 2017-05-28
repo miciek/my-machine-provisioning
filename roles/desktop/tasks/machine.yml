@@ -1,0 +1,4 @@
+---
+- name: Change hostname to {{ machine_name }}
+  hostname: name={{ machine_name }}
+  become: yes

@@ -7,3 +7,4 @@
   - include: chrome.yml
   - include: ohmyzsh.yml
   - include: spotify.yml
+  - include: machine.yml
