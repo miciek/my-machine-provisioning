@@ -45,6 +45,14 @@ Ansible is used to configure and manage servers and server groups. It's very eas
 - **instant provisioning**: I can provision my perfectly working environment on *any computer*, I just need to insert Live USB stick and run the command.
 - **learning opportunity**: DevOps and "infrastructure as a code" are the future of software development and Ansible plays a big part in it.
 
+## TODO
+- [ ] - configure timezone
+- [ ] - enable sound in VirtualBox-based machine
+- [ ] - configure natural scrolling in Chrome and other graphical apps
+- [ ] - keep `urxvt` history per window
+- [ ] - show internal i3 frame borders 
+- [ ] - make copy-pasting shortcuts universal
+
 ## Testing
 The machine can be easily provisioned from scratch using Vagrant. Just make sure you have Vagrant installed and execute `vagrant up`. Then you can use the fresh system inside VirtualBox.
 
